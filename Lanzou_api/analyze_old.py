@@ -18,8 +18,10 @@ def extract_text(input_text, left_condition, right_condition):
 
 
 def urlanalyze(url_param, psw_param, fname_param):
+    result_downurl = {}
     ###### 1 根据分享链接及密码并获取参数
     try:
+        filelist = fname_param.split(',')
         main_url = extract_text(url_param, '://', '.com')[0]
         response = requests.get(url_param, headers=headers)
         if response.status_code != 200:
@@ -55,7 +57,7 @@ def urlanalyze(url_param, psw_param, fname_param):
     ###### 3 解析返回的json
     try:
         for ii in data['text']:
-            if ii['name_all'] == fname_param:
+            if ii['name_all'] in filelist:
     ###### 4 解析出文件id, 并获取fn
                 try:
                     response = requests.get("https://" + main_url + ".com/"+ii['id'], headers=headers)
@@ -106,9 +108,10 @@ def urlanalyze(url_param, psw_param, fname_param):
                     else:
                         for key, value in response.headers.items():
                             if key == 'Location':
-                                return value
+                                result_downurl[ii['name_all']] = value
                                 # true_downurl = value
                 except:
                     return f"{fake_downurl} 伪直链请求失败"
+        return f"{result_downurl}"
     except:
         pass
