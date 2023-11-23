@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "Lanzou_api.wsgi.application"
+WSGI_APPLICATION = "Lanzou_api.wsgi.app"
 
 
 # Database
