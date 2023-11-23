@@ -103,7 +103,7 @@ def urlanalyze(url_param, psw_param, fname_param):
     ###### 7 获取真直链
                 try:
                     response = requests.get(fake_downurl, headers=headers, allow_redirects=False)
-                    if response.status_code != 200:
+                    if response.status_code != 302:
                         return f"{fake_downurl} 伪直链请求失败，状态码：{response.status_code}"
                     else:
                         for key, value in response.headers.items():
