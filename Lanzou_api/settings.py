@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-n(neff@ure*zyr=vewru2lk%e60$7n3$mt6#$vo!kpw+g$*rj7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'Lanzou_api.application']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "Lanzou_api",
 ]
 
 MIDDLEWARE = [
