@@ -18,7 +18,7 @@ def index(request):
         }
     else:
         context = {
-            'download_url': '请正确传入get参数  =>>  /?url=? & psw=? & fname=?'
+            'download_url': 'faild-400 请正确传入get参数  =>>  /?url=? & psw=? & fname=?'
         }
     # 渲染模板并返回HttpResponse
     return render(request, 'Lanzou_api.html', context)
