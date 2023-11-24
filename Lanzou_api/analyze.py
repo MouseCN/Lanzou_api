@@ -23,7 +23,7 @@ def urlanalyze(url_param, psw_param, fname_param):
         main_url = extract_text(url_param, '://', '.com')[0]
         response = requests.get(url_param, headers=headers)
         if response.status_code != 200:
-            return f"{url_param} 请求失败，状态码：{response.status_code}"
+            return f"{url_param} 请求失败faild-400，状态码：{response.status_code}"
         else:
             pg1 = extract_text(response.text, "'pg':", ",")[0]
             t1 = extract_text(response.text, "'t':", ",")[0]
@@ -41,17 +41,17 @@ def urlanalyze(url_param, psw_param, fname_param):
                 'pwd': psw_param
             }
     except:
-        return f"{url_param} 请求失败"
+        return f"{url_param} 请求失败faild-400"
     ###### 2 根据密码发送post请求
     try:
         response = requests.post("https://" + main_url + ".com/filemoreajax.php", headers=headers, data=data)
         if response.status_code != 200:
-            return f"https://{main_url}.com/filemoreajax.php 请求失败，状态码：{response.status_code}"
+            return f"https://{main_url}.com/filemoreajax.php 请求失败faild-400，状态码：{response.status_code}"
         data = response.json()
         if data['info'] != 'sucess':
-            return f"https://{main_url}.com/filemoreajax.php 请求失败，状态码：{response.status_code}"
+            return f"https://{main_url}.com/filemoreajax.php 请求失败faild-400，状态码：{response.status_code}"
     except:
-        return f"https://{main_url}.com/filemoreajax.php 请求失败"
+        return f"https://{main_url}.com/filemoreajax.php 请求失败faild-400"
     ###### 3 解析返回的json
     try:
         for ii in data['text']:
@@ -60,16 +60,16 @@ def urlanalyze(url_param, psw_param, fname_param):
                 try:
                     response = requests.get("https://" + main_url + ".com/"+ii['id'], headers=headers)
                     if response.status_code != 200:
-                        return f"https://{main_url}.com/{ii['id']} 请求失败，状态码：{response.status_code}"
+                        return f"https://{main_url}.com/{ii['id']} 请求失败faild-400，状态码：{response.status_code}"
                     else:
                         fn = extract_text(response.text, 'src="', '" frameborder')[1]
                 except:
-                    return f"https://{main_url}.com/{ii['id']} 请求失败"
+                    return f"https://{main_url}.com/{ii['id']} 请求失败faild-400"
     ###### 5 解析fn
                 try:
                     response = requests.get("https://" + main_url + ".com/"+fn, headers=headers)
                     if response.status_code != 200:
-                        return f"https://{main_url}.com/{fn} 请求失败，状态码：{response.status_code}"
+                        return f"https://{main_url}.com/{fn} 请求失败faild-400，状态码：{response.status_code}"
                     else:
                         signs1 = extract_text(response.text, "'signs':", ",")[0]
                         websignkey1 = extract_text(response.text, "'websignkey':", ",")[0]
@@ -82,7 +82,7 @@ def urlanalyze(url_param, psw_param, fname_param):
                             'ves': extract_text(response.text, "'ves':", " ")[0]
                         }
                 except:
-                    return f"https://{main_url}.com/{fn} 请求失败"
+                    return f"https://{main_url}.com/{fn} 请求失败faild-400"
     ###### 6 获取伪直链
                 try:
                     headers2 = {
@@ -92,23 +92,23 @@ def urlanalyze(url_param, psw_param, fname_param):
                     }
                     response = requests.post("https://"+main_url+".com/ajaxm.php", headers=headers2, data=data)
                     if response.status_code != 200:
-                        return f"https://{main_url}.com/ajaxm.php 请求失败，状态码：{response.status_code}"
+                        return f"https://{main_url}.com/ajaxm.php 请求失败faild-400，状态码：{response.status_code}"
                     else:
                         data = response.json()
                         fake_downurl = data['dom'] + '/file/' + data['url']
                 except:
-                    return f"https://{main_url}.com/ajaxm.php 请求失败"
+                    return f"https://{main_url}.com/ajaxm.php 请求失败faild-400"
     ###### 7 获取真直链
                 try:
                     response = requests.get(fake_downurl, headers=headers, allow_redirects=False)
                     if response.status_code != 302:
-                        return f"{fake_downurl} 伪直链请求失败，状态码：{response.status_code}"
+                        return f"{fake_downurl} 伪直链请求失败faild-400，状态码：{response.status_code}"
                     else:
                         for key, value in response.headers.items():
                             if key == 'Location':
                                 return value
                                 # true_downurl = value
                 except:
-                    return f"{fake_downurl} 伪直链请求失败"
+                    return f"{fake_downurl} 伪直链请求失败faild-400"
     except:
         pass
