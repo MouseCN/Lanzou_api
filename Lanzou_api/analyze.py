@@ -18,6 +18,7 @@ def extract_text(input_text, left_condition, right_condition):
 
 
 def urlanalyze(url_param, psw_param, fname_param):
+    result = ''
     ###### 1 根据分享链接及密码并获取参数
     try:
         main_url = extract_text(url_param, '://', '.com')[0]
@@ -106,9 +107,12 @@ def urlanalyze(url_param, psw_param, fname_param):
                     else:
                         for key, value in response.headers.items():
                             if key == 'Location':
+                                result = value
                                 return value
                                 # true_downurl = value
                 except:
                     return f"{fake_downurl} 伪直链请求失败faild-400"
+        if result == '':
+            return "请求失败faild-400"
     except:
         pass
