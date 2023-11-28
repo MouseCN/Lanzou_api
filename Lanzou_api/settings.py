@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-n(neff@ure*zyr=vewru2lk%e60$7n3$mt6#$vo!kpw+g$*rj7
 DEBUG = True
 
 # 坑
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'lanzou-api-one.vercel.app', 'www.wanafly.top', 'wanafly.top']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','lanzou-api-one.vercel.app', 'lz.cutie-lambkin.top']
 
 
 # Application definition
