@@ -73,7 +73,7 @@
             font-family: "Montserrat";
             text-align: center;
             width: 100%;
-            display: none; /* 初始隐藏内容 */
+            display: block; /* 初始显示Loading文本 */
         }
 
         .title h1 {
@@ -121,7 +121,7 @@
 
 <body>
     <div class="loading-overlay">
-        <div class="loading-text">Loading...</div>
+        <h1 class="loading-text">Loading...</h1>
     </div>
 
     <canvas id="lines"></canvas>
@@ -135,6 +135,8 @@
         window.onload = function () {
             // 隐藏加载特效
             document.querySelector('.loading-overlay').style.display = 'none';
+            // 隐藏Loading文本
+            document.querySelector('.loading-text').style.display = 'none';
             // 显示内容
             document.querySelector('.title').style.display = 'block';
         };
