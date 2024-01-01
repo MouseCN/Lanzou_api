@@ -1,172 +1,174 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <title>Download......</title>
-    <script src="js/jquery.min.js"></script>
-    <style>
-        @import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
-        .more-pens {
-            position: fixed;
-            left: 20px;
-            bottom: 20px;
-            z-index: 10;
-            font-family: "Montserrat";
-            font-size: 12px;
-        }
+	<head>
+		<meta charset="utf-8">
+		<title>Download......</title>
+		<style>
+			@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
+			        .more-pens {
+			            position: fixed;
+			            left: 20px;
+			            bottom: 20px;
+			            z-index: 10;
+			            font-family: "Montserrat";
+			            font-size: 12px;
+			        }
+			
+			        a.white-mode,
+			        a.white-mode:link,
+			        a.white-mode:visited,
+			        a.white-mode:active {
+			            font-family: "Montserrat";
+			            font-size: 12px;
+			            text-decoration: none;
+			            background: #212121;
+			            padding: 4px 8px;
+			            color: #f7f7f7;
+			        }
+			
+			        a.white-mode:hover,
+			        a.white-mode:link:hover,
+			        a.white-mode:visited:hover,
+			        a.white-mode:active:hover {
+			            background: #edf3f8;
+			            color: #212121;
+			        }
+			
+			        body {
+			            margin: 0;
+			            padding: 0;
+			            overflow: hidden;
+			            width: 100%;
+			            height: 100%;
+			            background: #000000;
+			        }
+			
+			        .loading-overlay {
+			            position: fixed;
+			            top: 0;
+			            left: 0;
+			            width: 100%;
+			            height: 100%;
+			            background: #000;
+			            display: flex;
+			            justify-content: center;
+			            align-items: center;
+			            z-index: 1000;
+			        }
+			
+			        .loading-text {
+			            color: #fff;
+			            font-family: "Montserrat";
+			            font-size: 24px;
+			            animation: pulse 1.5s infinite; /* 添加缓动效果的动画 */
+			        }
+			
+			        @keyframes pulse {
+			            0% {
+			                transform: scale(1);
+			            }
+			
+			            50% {
+			                transform: scale(1.1);
+			            }
+			
+			            100% {
+			                transform: scale(1);
+			            }
+			        }
+			
+			        .title {
+			            z-index: 10;
+			            position: absolute;
+			            left: 50%;
+			            top: 50%;
+			            transform: translateX(-50%) translateY(-50%);
+			            font-family: "Montserrat";
+			            text-align: center;
+			            width: 100%;
+			            display: block; /* 初始显示Loading文本 */
+			        }
+			
+			        .title h1 {
+			            position: relative;
+			            color: #EEEEEE;
+			            font-weight: 600;
+			            font-size: 60px;
+			            padding: 0;
+			            margin: 0;
+			            line-height: 1;
+			            text-shadow: 0 0 30px #000155;
+			            cursor: pointer; /* 添加鼠标指针样式 */
+			            transition: color 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+			        }
+			
+			        .title h1:hover {
+			            color: #03dac6; /* 鼠标悬停时的颜色 */
+			            transform: scale(1.1); /* 鼠标悬停时的缩放效果 */
+			        }
+			
+			        .title h1 span {
+			            font-weight: 600;
+			            padding: 0;
+			            margin: 0;
+			            color: #BBB;
+			        }
+			
+			        .title h3 {
+			            font-weight: 200;
+			            font-size: 20px;
+			            padding: 0;
+			            margin: 0;
+			            line-height: 1;
+			            color: #EEEEEE;
+			            letter-spacing: 2px;
+			            text-shadow: 0 0 30px #000155;
+			            cursor: pointer; /* 添加鼠标指针样式 */
+			            user-select: all; /* 允许用户选择文本 */
+			        }
+		</style>
+				<div class="loading-overlay">
+			<h1 class="loading-text">Loading...</h1>
+		</div>
+	</head>
 
-        a.white-mode,
-        a.white-mode:link,
-        a.white-mode:visited,
-        a.white-mode:active {
-            font-family: "Montserrat";
-            font-size: 12px;
-            text-decoration: none;
-            background: #212121;
-            padding: 4px 8px;
-            color: #f7f7f7;
-        }
+	<body>
+		<div class="loading-overlay">
+			<h1 class="loading-text">Loading...</h1>
+		</div>
 
-        a.white-mode:hover,
-        a.white-mode:link:hover,
-        a.white-mode:visited:hover,
-        a.white-mode:active:hover {
-            background: #edf3f8;
-            color: #212121;
-        }
+		<div class="title">
+			<h3 onclick="copyText(this)">{{download_url}}</h3>
+			<h1 onclick="downloadFile('{{download_url}}')">Download</h1>
+		</div>
 
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-        }
-
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .loading-text {
-            color: #fff;
-            font-family: "Montserrat";
-            font-size: 24px;
-            animation: pulse 1.5s infinite; /* 添加缓动效果的动画 */
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .title {
-            z-index: 10;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translateX(-50%) translateY(-50%);
-            font-family: "Montserrat";
-            text-align: center;
-            width: 100%;
-            display: block; /* 初始显示Loading文本 */
-        }
-
-        .title h1 {
-            position: relative;
-            color: #EEEEEE;
-            font-weight: 600;
-            font-size: 60px;
-            padding: 0;
-            margin: 0;
-            line-height: 1;
-            text-shadow: 0 0 30px #000155;
-            cursor: pointer; /* 添加鼠标指针样式 */
-            transition: color 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
-        }
-
-        .title h1:hover {
-            color: #03dac6; /* 鼠标悬停时的颜色 */
-            transform: scale(1.1); /* 鼠标悬停时的缩放效果 */
-        }
-
-        .title h1 span {
-            font-weight: 600;
-            padding: 0;
-            margin: 0;
-            color: #BBB;
-        }
-
-        .title h3 {
-            font-weight: 200;
-            font-size: 20px;
-            padding: 0;
-            margin: 0;
-            line-height: 1;
-            color: #EEEEEE;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px #000155;
-            cursor: pointer; /* 添加鼠标指针样式 */
-            user-select: all; /* 允许用户选择文本 */
-        }
-    </style>
-</head>
-
-<body>
-    <div class="loading-overlay">
-        <h1 class="loading-text">Loading...</h1>
-    </div>
-
-    <div class="title">
-        <h3 onclick="copyText(this)">{{download_url}}</h3>
-        <h1 onclick="downloadFile('{{download_url}}')">Download</h1>
-    </div>
-
-    <script>
-        // 模拟加载完成后显示内容
-        window.onload = function () {
-            // 隐藏加载特效
-            document.querySelector('.loading-overlay').style.display = 'none';
-            // 隐藏Loading文本
-            document.querySelector('.loading-text').style.display = 'none';
-            // 显示内容
-            document.querySelector('.title').style.display = 'block';
-        };
-
-        // 复制文本函数
-        function copyText(element) {
-            var range = document.createRange();
-            range.selectNode(element);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-            window.getSelection().removeAllRanges();
-        }
-
-        // 下载函数
-        function downloadFile(downloadUrl) {
-            window.location.href = downloadUrl;
-        }
-    </script>
-</body>
+		<script>
+			// 模拟加载完成后显示内容
+			        window.onload = function () {
+			            // 隐藏加载特效
+			            document.querySelector('.loading-overlay').style.display = 'none';
+			            // 隐藏Loading文本
+			            document.querySelector('.loading-text').style.display = 'none';
+			            // 显示内容
+			            document.querySelector('.title').style.display = 'block';
+			        };
+			
+			        // 复制文本函数
+			        function copyText(element) {
+			            var range = document.createRange();
+			            range.selectNode(element);
+			            window.getSelection().removeAllRanges();
+			            window.getSelection().addRange(range);
+			            document.execCommand("copy");
+			            window.getSelection().removeAllRanges();
+			        }
+			
+			        // 下载函数
+			        function downloadFile(downloadUrl) {
+			            window.location.href = downloadUrl;
+			        }
+		</script>
+	</body>
 
 </html>
