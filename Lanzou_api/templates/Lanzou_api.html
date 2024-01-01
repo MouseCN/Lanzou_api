@@ -1,97 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Download......</title>
-		<script src="js/jquery.min.js"></script>
-		<style>
-			@import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
-			.more-pens {
-			  position: fixed;
-			  left: 20px;
-			  bottom: 20px;
-			  z-index: 10;
-			  font-family: "Montserrat";
-			  font-size: 12px;
-			}
-			
-			a.white-mode, a.white-mode:link, a.white-mode:visited, a.white-mode:active {
-			  font-family: "Montserrat";
-			  font-size: 12px;
-			  text-decoration: none;
-			  background: #212121;
-			  padding: 4px 8px;
-			  color: #f7f7f7;
-			}
-			a.white-mode:hover, a.white-mode:link:hover, a.white-mode:visited:hover, a.white-mode:active:hover {
-			  background: #edf3f8;
-			  color: #212121;
-			}
-			
-			body {
-			  margin: 0;
-			  padding: 0;
-			  overflow: hidden;
-			  width: 100%;
-			  height: 100%;
-			  background: #000000;
-			}
-			
-			.title {
-			  z-index: 10;
-			  position: absolute;
-			  left: 50%;
-			  top: 50%;
-			  transform: translateX(-50%) translateY(-50%);
-			  font-family: "Montserrat";
-			  text-align: center;
-			  width: 100%;
-			}
-			.title h1 {
-			  position: relative;
-			  color: #EEEEEE;
-			  font-weight: 600;
-			  font-size: 60px;
-			  padding: 0;
-			  margin: 0;
-			  line-height: 1;
-			  text-shadow: 0 0 30px #000155;
-			  cursor: pointer; /* 添加鼠标指针样式 */
-			}
-			.title h1 span {
-			  font-weight: 600;
-			  padding: 0;
-			  margin: 0;
-			  color: #BBB;
-			}
-			.title h3 {
-			  font-weight: 200;
-			  font-size: 20px;
-			  padding: 0;
-			  margin: 0;
-			  line-height: 1;
-			  color: #EEEEEE;
-			  letter-spacing: 2px;
-			  text-shadow: 0 0 30px #000155;
-			}
-		</style>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		<canvas id="lines"></canvas>
-		<div class="title">
-			<h3>{{download_url}}</h3>
-			<h3> </h3>
-			<h1 onclick="downloadFile('{{download_url}}')">Download</h1> <!-- 添加onclick事件 -->
-		</div>
 
-		// 下载函数
-		function downloadFile(downloadUrl) {
-		window.location.href = downloadUrl;
-		}
-		</script>
-		<script src="js/script.js"></script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <title>Download......</title>
+    <script src="js/jquery.min.js"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600");
+        .more-pens {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            z-index: 10;
+            font-family: "Montserrat";
+            font-size: 12px;
+        }
+
+        a.white-mode,
+        a.white-mode:link,
+        a.white-mode:visited,
+        a.white-mode:active {
+            font-family: "Montserrat";
+            font-size: 12px;
+            text-decoration: none;
+            background: #212121;
+            padding: 4px 8px;
+            color: #f7f7f7;
+        }
+
+        a.white-mode:hover,
+        a.white-mode:link:hover,
+        a.white-mode:visited:hover,
+        a.white-mode:active:hover {
+            background: #edf3f8;
+            color: #212121;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+        }
+
+        .title {
+            z-index: 10;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            font-family: "Montserrat";
+            text-align: center;
+            width: 100%;
+        }
+
+        .title h1 {
+            position: relative;
+            color: #EEEEEE;
+            font-weight: 600;
+            font-size: 60px;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 0 30px #000155;
+            cursor: pointer; /* 添加鼠标指针样式 */
+        }
+
+        .title h1 span {
+            font-weight: 600;
+            padding: 0;
+            margin: 0;
+            color: #BBB;
+        }
+
+        .title h3 {
+            font-weight: 200;
+            font-size: 20px;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+            color: #EEEEEE;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px #000155;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <canvas id="lines"></canvas>
+    <div class="title">
+        <h3>{{download_url}}</h3>
+        <h3> </h3>
+        <h1 onclick="downloadFile('{{download_url}}')">Download</h1> <!-- 添加onclick事件 -->
+    </div>
+
+    <script>
+        // 下载函数
+        function downloadFile(downloadUrl) {
+            window.location.href = downloadUrl;
+        }
+    </script>
+    <script src="js/script.js"></script>
+</body>
+
 </html>
