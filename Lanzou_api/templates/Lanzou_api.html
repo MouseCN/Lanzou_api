@@ -3,10 +3,30 @@
 
 <head>
     <title>DownloadURL</title>
+    <script>
+        window.onload = function () {
+            // 下载地址
+            var downloadUrl = '{{download_url}}';
+
+            // 从链接中解析出文件名
+            var fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1, downloadUrl.indexOf('?'));
+            fileName = decodeURIComponent(fileName);
+
+            // 创建下载链接
+            var downloadLink = document.createElement('a');
+            downloadLink.href = downloadUrl;
+            downloadLink.download = fileName;
+
+            // 触发下载
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        };
+    </script>
 </head>
 
 <body>
-    <p>{{download_url}}</p>
+    <!-- 页面内容 -->
 </body>
 
 </html>
