@@ -5,7 +5,7 @@
     <script>
         window.onload = function () {
             // 下载地址
-            var downloadUrl = {{download_url}};
+            var downloadUrl = '{{download_url}}';
 
             // 从链接中解析出文件名
             var fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1, downloadUrl.indexOf('?'));
