@@ -5,6 +5,20 @@
 </head>
 
 <body>
+    <script>
+    window.onload = function() {
+        var downloadUrl = "{{download_url}}";
+        var fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1);
+        var link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = fileName;
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+
     <a href="{{download_url}}" download>点击下载</a>
 </body>
 </html>
