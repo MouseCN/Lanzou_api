@@ -66,6 +66,12 @@
             line-height: 1;
             text-shadow: 0 0 30px #000155;
             cursor: pointer; /* 添加鼠标指针样式 */
+            transition: color 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+        }
+
+        .title h1:hover {
+            color: #03dac6; /* 鼠标悬停时的颜色 */
+            transform: scale(1.1); /* 鼠标悬停时的缩放效果 */
         }
 
         .title h1 span {
@@ -96,7 +102,7 @@
     <div class="title">
         <h3>{{download_url}}</h3>
         <h3> </h3>
-        <h1 onclick="downloadFile('{{download_url}}')">Download</h1> <!-- 添加onclick事件 -->
+        <h1 onclick="downloadFile('{{download_url}}')">Download</h1>
     </div>
 
     <script>
