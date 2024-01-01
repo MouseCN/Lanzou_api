@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -56,6 +56,7 @@ body {
   margin: 0;
   line-height: 1;
   text-shadow: 0 0 30px #000155;
+  cursor: pointer; /* 添加鼠标指针样式 */
 }
 .title h1 span {
   font-weight: 600;
@@ -79,7 +80,7 @@ body {
 <div class="title">
     <h3>{{download_url}}</h3>
     <h3> </h3>
-    <h1>Download</h1>
+    <h1 onclick="downloadFile('{{download_url}}')">Download</h1> <!-- 添加onclick事件 -->
 </div><script>
 let max_particles    = 100;
 let particles        = [];
@@ -252,8 +253,12 @@ function update(){
 }
 
 update()
+
+// 下载函数
+function downloadFile(downloadUrl) {
+  window.location.href = downloadUrl;
+}
 </script>
 
 </body>
 </html>
-
