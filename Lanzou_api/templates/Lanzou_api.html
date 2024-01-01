@@ -110,6 +110,8 @@
             color: #EEEEEE;
             letter-spacing: 2px;
             text-shadow: 0 0 30px #000155;
+            cursor: pointer; /* 添加鼠标指针样式 */
+            user-select: all; /* 允许用户选择文本 */
         }
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -124,8 +126,7 @@
 
     <canvas id="lines"></canvas>
     <div class="title">
-        <h3>{{download_url}}</h3>
-        <h3> </h3>
+        <h3 onclick="copyText(this)">{{download_url}}</h3>
         <h1 onclick="downloadFile('{{download_url}}')">Download</h1>
     </div>
 
@@ -137,6 +138,16 @@
             // 显示内容
             document.querySelector('.title').style.display = 'block';
         };
+
+        // 复制文本函数
+        function copyText(element) {
+            var range = document.createRange();
+            range.selectNode(element);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+        }
 
         // 下载函数
         function downloadFile(downloadUrl) {
