@@ -45,6 +45,25 @@
             background: #000000;
         }
 
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-text {
+            color: #fff;
+            font-family: "Montserrat";
+            font-size: 24px;
+        }
+
         .title {
             z-index: 10;
             position: absolute;
@@ -54,6 +73,7 @@
             font-family: "Montserrat";
             text-align: center;
             width: 100%;
+            display: none; /* 初始隐藏内容 */
         }
 
         .title h1 {
@@ -98,6 +118,10 @@
 </head>
 
 <body>
+    <div class="loading-overlay">
+        <div class="loading-text">Loading...</div>
+    </div>
+
     <canvas id="lines"></canvas>
     <div class="title">
         <h3>{{download_url}}</h3>
@@ -106,6 +130,14 @@
     </div>
 
     <script>
+        // 模拟加载完成后显示内容
+        window.onload = function () {
+            // 隐藏加载特效
+            document.querySelector('.loading-overlay').style.display = 'none';
+            // 显示内容
+            document.querySelector('.title').style.display = 'block';
+        };
+
         // 下载函数
         function downloadFile(downloadUrl) {
             window.location.href = downloadUrl;
